@@ -104,6 +104,9 @@
 			.distance(150)
 			.charge(-300)
 			.size([width, height]);
+
+		var drag = force.drag()
+			.on("dragstart", dragstart);
 		
 		var color = d3.scale.category10();
 		
