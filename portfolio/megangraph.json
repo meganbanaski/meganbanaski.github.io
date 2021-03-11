@@ -9,7 +9,7 @@
             {"id": 7,"name": "2018 Raymond E. & Ellen Specht Cartography Scholarship", "group": 2},
             {"id": 8,"name": "2019 WLIA Damon Anderson Memorial Scholarship", "group": 2},
             {"id": 9,"name": "2018 USA Curling College National Champion", "group": 2},
-            {"id": 10,"name": "<a target='_blank' href='https://esri.com'>Esri</a>", "group": 3},
+            {"id": 10,"name": "Esri", "group": 3},
             {"id": 11,"name": "Solution Engineer - Intelligence", "group": 3},
             {"id": 12,"name": "Solution Engineer Intern", "group": 3},
             {"id": 13,"name": "UWSP Tutoring-Learning Center", "group": 3},
@@ -30,7 +30,8 @@
             {"id": 28, "name": "B.S. Geography (GISc & Cartography focus)", "group": 2},
             {"id": 29, "name": "Spatial Analysis Minor", "group": 2},
             {"id": 30, "name": "Geographic Information Science Minor", "group": 2},
-            {"id": 31, "name": "Computer Information Systems Minor", "group": 2}
+            {"id": 31, "name": "Computer Information Systems Minor", "group": 2},
+            {"id": 32, "name": "National Government Business Development 2020 Rookie of the Year", "group": 5}
     ], "links": [
         {"source":0, "target":1},
         {"source":0, "target":2},
@@ -62,6 +63,7 @@
         {"source":5, "target":28},
         {"source":5, "target":29},
         {"source":5, "target":30},
-        {"source":5, "target":31}
+        {"source":5, "target":31},
+        {"source":4, "target":32}
     ]
 }
