@@ -28,6 +28,10 @@
 		stroke-width:3px;
 		fill:#555;
 		}
+
+		.node.fixed {
+		fill: #f00;
+		}
 		
 		</style>
 </head>
@@ -121,6 +125,7 @@
 			  .attr("class", "node")
 			  .style("fill", function(d) { return color(d.group); })
 			  .style("stroke-width", 0.5)
+			  .on("dblclick", dblclick)
 			  .call(force.drag);
 			  
 		
@@ -141,6 +146,14 @@
 		
 			node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 		  });
+
+		  function dblclick(d) {
+			d3.select(this).classed("fixed", d.fixed = false);
+			}
+
+			function dragstart(d) {
+			d3.select(this).classed("fixed", d.fixed = true);
+			}
 		});
 		
 		</script>
