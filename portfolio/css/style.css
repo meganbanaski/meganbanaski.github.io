@@ -197,7 +197,8 @@ button:focus {
       margin-right: 45px;
     }
       .header_area .navbar .nav .nav-item .nav-link {
-        font: 500 14px/100px "Rubik", sans-serif;
+
+        font: 500 14px/75px "Rubik", sans-serif;
         text-transform: uppercase;
         color: #0ac294;
         padding: 0px;
@@ -536,3 +537,4 @@ button:focus {
 
   .banner_area .banner_inner .banner_content h2 {
     font-size: 32px; }
+

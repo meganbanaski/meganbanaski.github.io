@@ -32,6 +32,29 @@
 		.node.fixed {
 		fill: #f00;
 		}
+
+
+		.dropdown {
+		background-color:transparent;               
+		}
+
+		.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: transparent;
+		min-width: 160px;
+		z-index: 1;
+		}
+
+		.dropdown:hover .dropdown-content {
+		display: block;
+		}
+
+		.dropdown-content a {font: 500 14px/50px "Rubik", sans-serif; color: #0ac294;}
+		
+		.dropdown-content a:hover {color: #4458dc;}
+
+		
 		
 		</style>
 </head>
@@ -54,8 +77,13 @@
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav justify-content-end">
 							<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="portfolio.html">Map Portfolio</a></li>
+							<li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
+							<li class="nav-item"><div class="dropdown"><span class="nav-link">Code Samples</span><div class="dropdown-content">
+									<a class="nav-item" target="_blank" href="https://github.com/mbana641">GITHUB</a>
+									<a class="nav-item" target="_blank" href="https://mbana641.github.io/javascript_course">JAVASCRIPT COURSE</a>
+								</div></div></li>
 							<li class="nav-item"><a class="nav-link" href="maptour.html">Map Tour</a></li>
+                            <li class="nav-item"><a class="nav-link" href="portfolio.html">Map Portfolio</a></li>
 						</ul>
 					</div>
 				</div>
