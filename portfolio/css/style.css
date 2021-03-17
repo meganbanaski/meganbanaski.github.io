@@ -538,3 +538,22 @@ button:focus {
   .banner_area .banner_inner .banner_content h2 {
     font-size: 32px; }
 
+    .dropdown {
+      background-color:transparent;               
+      }
+  
+      .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: transparent;
+      min-width: 160px;
+      z-index: 1;
+      }
+  
+      .dropdown:hover .dropdown-content {
+      display: block;
+      }
+  
+      .dropdown-content a {font: 500 14px/50px "Rubik", sans-serif; color: #0ac294;}
+      
+      .dropdown-content a:hover {color: #4458dc;}
