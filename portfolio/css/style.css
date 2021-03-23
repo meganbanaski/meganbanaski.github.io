@@ -200,13 +200,13 @@ button:focus {
 
         font: 500 14px/75px "Rubik", sans-serif;
         text-transform: uppercase;
-        color: #0ac294;
+        color: #088a69;
         padding: 0px;
         display: inline-block; }
         .header_area .navbar .nav .nav-item .nav-link:after {
           display: none; }
       .header_area .navbar .nav .nav-item:hover .nav-link, .header_area .navbar .nav .nav-item.active .nav-link {
-        color: #4458dc; }
+        color: #071155; }
       .header_area .navbar .nav .nav-item.submenu {
         position: relative; }
         .header_area .navbar .nav .nav-item.submenu ul {
