@@ -46,8 +46,10 @@
     require([
         "esri/Map",
         "esri/views/MapView",
-        "esri/layers/FeatureLayer"
-    ], function(Map, MapView, FeatureLayer) {
+        "esri/layers/FeatureLayer",
+        "esri/renderers/UniqueValueRenderer",
+        "esri/symbols/SimpleMarkerSymbol"
+    ], function(Map, MapView, FeatureLayer, UniqueValueRenderer, SimpleMarkerSymbol) {
 
     var popup = {
         "title": "{Name}",
@@ -59,8 +61,33 @@
         popupTemplate: popup
     });
 
+    var renderer = new UniqueValueRenderer({
+      field: "Location_Type",
+      defaultSymbol: new SimpleMarkerSymbol()
+    });
+
+    renderer.addUniqueValueInfo("Curling",
+      new SimpleMarkerSymbol({
+        color: "lightblue",
+        width: "12px"
+      })
+    );
+    renderer.addUniqueValueInfo("School",
+      new SimpleMarkerSymbol({
+        color: "blue",
+        width: "12px"
+      })
+    );
+    renderer.addUniqueValueInfo("Work",
+      new SimpleMarkerSymbol({
+        color: "green",
+        width: "12px"
+      })
+    );
+
+
     var map = new Map({
-        basemap: "hybrid",
+        basemap: "gray-vector",
         layers: [aoi]
     });
 
