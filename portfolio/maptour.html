@@ -48,8 +48,13 @@
         "esri/views/MapView",
         "esri/layers/FeatureLayer",
         "esri/renderers/UniqueValueRenderer",
-        "esri/symbols/SimpleMarkerSymbol"
-    ], function(Map, MapView, FeatureLayer, UniqueValueRenderer, SimpleMarkerSymbol) {
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/widgets/Legend",
+        "esri/widgets/Compass",
+        "esri/widgets/Zoom",
+        "esri/widgets/BasemapGallery",
+      "esri/widgets/Expand"
+    ], function(Map, MapView, FeatureLayer, UniqueValueRenderer, SimpleMarkerSymbol, Legend, Compass, Zoom, BasemapGallery, Expand) {
 
     var popup = {
         "title": "{Name}",
@@ -67,15 +72,17 @@
         width: "12px"
       })
     );
-    renderer.addUniqueValueInfo("School",
-      new SimpleMarkerSymbol({
-        color: "blue",
-        width: "12px"
-      })
-    );
+    
     renderer.addUniqueValueInfo("Work",
       new SimpleMarkerSymbol({
         color: "green",
+        width: "12px"
+      })
+    );
+
+    renderer.addUniqueValueInfo("School",
+      new SimpleMarkerSymbol({
+        color: "blue",
         width: "12px"
       })
     );
@@ -96,8 +103,43 @@
         container: "viewDiv",
         map: map,
         center: [-83.031348,42.357112],
-        zoom: 6.5
+        zoom: 5
     });
+
+    var legend = new Legend({
+        view: view,
+        layerInfos: [{
+            layer: aoi,
+            title: "Types of Locations"
+        }]
+    });
+
+    view.ui.add(legend, "bottom-right");
+
+    var compass = new Compass({
+        view: view
+      });
+      view.ui.add(compass, "top-left");
+
+    var zoom = new Zoom({
+        view: view
+    });
+    var zoom2 = new Zoom({
+        view: view
+    });
+    view.ui.add(zoom, "top-left");
+    view.ui.add(zoom2, "top-right");
+
+    var basemapGallery = new BasemapGallery({
+        view: view
+      });
+      
+      var basemapExpand = new Expand ({
+        content: basemapGallery,
+        view: view
+      });
+
+      view.ui.add(basemapExpand, "top-right");
       
     });
 </script>
