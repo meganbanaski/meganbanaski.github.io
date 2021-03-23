@@ -56,11 +56,6 @@
         "content": "{Description}"
     }
 
-    var aoi = new FeatureLayer({
-        url: "https://services.arcgis.com/hRUr1F8lE8Jq2uJo/arcgis/rest/services/Places_Of_Interest/FeatureServer",
-        popupTemplate: popup
-    });
-
     var renderer = new UniqueValueRenderer({
       field: "Location_Type",
       defaultSymbol: new SimpleMarkerSymbol()
@@ -84,6 +79,12 @@
         width: "12px"
       })
     );
+
+    var aoi = new FeatureLayer({
+        url: "https://services.arcgis.com/hRUr1F8lE8Jq2uJo/arcgis/rest/services/Places_Of_Interest/FeatureServer",
+        popupTemplate: popup,
+        renderer: renderer
+    });
 
 
     var map = new Map({
