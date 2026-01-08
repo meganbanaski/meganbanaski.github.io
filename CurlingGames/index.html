@@ -162,7 +162,7 @@
           <div class="event">🏆 ${game.event}</div>
           <div>📍 ${game.location}</div>
 
-          ${type !== "past-game" ? `
+          ${type === "next-game" || type === "current-game" ? `
             <div class="stream">
               ${game.stream
                 ? `📺 <a href="${game.stream}" target="_blank">Stream</a>`
