@@ -185,7 +185,7 @@
         : `<div class="empty">No game in progress.</div>`;
 
     document.getElementById("next-game").innerHTML =
-      !currentGame && nextGame
+      nextGame
         ? renderGame(nextGame, "next-game")
         : `<div class="empty">No upcoming games.</div>`;
 
