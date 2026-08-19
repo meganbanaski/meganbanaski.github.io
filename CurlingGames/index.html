@@ -37,18 +37,6 @@
       overflow: hidden;
     }
 
-    /* Center line */
-    .header-ice-zone::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 4px;
-      height: 100%;
-      background: #005bbb;
-      opacity: 0.4;
-    }
-
     /* Hog line */
     .header-ice-zone::after {
       content: "";
@@ -64,37 +52,57 @@
     .header-ice-zone .right-house {
       position: absolute;
       top: 50%;
-      left: 80%;
+      left: 90%;
       transform: translate(-50%, -50%);
       width: 90px;
       height: 90px;
-      border-radius: 50%;
-      background: radial-gradient(
-        circle,
-        rgba(255,255,255,1) 0%,
-        rgba(247,201,72,0.4) 40%,
-        rgba(214,40,40,0.4) 70%,
-        rgba(0,91,187,0.4) 100%
-      );
-      opacity: 0.35;
     }
 
     .header-ice-zone .left-house {
       position: absolute;
       top: 50%;
-      left: 20%;
+      left: 10%;
       transform: translate(-50%, -50%);
       width: 90px;
       height: 90px;
-      border-radius: 50%;
-      background: radial-gradient(
-        circle,
-        rgba(255,255,255,1) 0%,
-        rgba(247,201,72,0.4) 40%,
-        rgba(214,40,40,0.4) 70%,
-        rgba(0,91,187,0.4) 100%
-      );
+    }
+
+    /* Blue outer ring */
+    .blue-ring {
+      width: 90px;
+      height: 90px;
+      background: #005bbb;
       opacity: 0.35;
+    }
+
+    /* White ring */
+    .white-ring {
+      width: 60px;
+      height: 60px;
+      background: #ffffff;
+      top: 15px;
+      left: 15px;
+      opacity: 0.8;
+    }
+
+    /* Red ring */
+    .red-ring {
+      width: 40px;
+      height: 40px;
+      background: #d62828;
+      top: 25px;
+      left: 25px;
+      opacity: 0.5;
+    }
+
+    /* Yellow button */
+    .yellow-ring {
+      width: 20px;
+      height: 20px;
+      background: #f7c948;
+      top: 35px;
+      left: 35px;
+      opacity: 0.9;
     }
 
     /* Curling stone */
@@ -240,8 +248,18 @@
   <header class="site-header">
     <h1>Curling Games</h1>
     <div class="header-ice-zone">
-      <div class="left-house"></div>
-      <div class="right-house"></div>
+      <div class="left-house">
+        <div class="ring blue-ring"></div>
+        <div class="ring white-ring"></div>
+        <div class="ring red-ring"></div>
+        <div class="ring yellow-ring">
+      </div>
+      <div class="right-house">
+        <div class="ring blue-ring"></div>
+        <div class="ring white-ring"></div>
+        <div class="ring red-ring"></div>
+        <div class="ring yellow-ring">
+      </div>
       <div class="stone">🥌</div>
       <div class="trail"></div>
     </div>
