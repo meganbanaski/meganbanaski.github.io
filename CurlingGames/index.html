@@ -35,6 +35,7 @@
       height: 120px;
       background: #ffffff;
       overflow: hidden;
+      border:2px solid #0F0F0F;
     }
 
     /* --- Houses --- */
@@ -42,16 +43,16 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 90px;
-      height: 90px;
+      width: 120px;
+      height: 120px;
     }
 
     .left-house {
-      left: 10%;
+      left: 0.3%;
     }
 
     .right-house {
-      right: 10%;
+      right: 0.3%;
     }
 
     /* --- Rings --- */
@@ -61,15 +62,15 @@
     }
 
     .blue-ring {
-      width: 90px;
-      height: 90px;
+      width: 120px;
+      height: 120px;
       background: #005bbb;
       opacity: 0.35;
     }
 
     .white-ring {
-      width: 60px;
-      height: 60px;
+      width: 90px;
+      height: 90px;
       background: #ffffff;
       top: 15px;
       left: 15px;
@@ -77,11 +78,11 @@
     }
 
     .red-ring {
-      width: 40px;
-      height: 40px;
+      width: 60px;
+      height: 60px;
       background: #d62828;
-      top: 25px;
-      left: 25px;
+      top: 30px;
+      left: 30px;
       opacity: 0.5;
     }
 
@@ -89,8 +90,8 @@
       width: 20px;
       height: 20px;
       background: #f7c948;
-      top: 35px;
-      left: 35px;
+      top: 50px;
+      left: 50px;
       opacity: 0.9;
     }
 
@@ -144,35 +145,12 @@
       z-index: 2;
     }
 
-    /* Back line: vertical behind tee line */
-    .right-house .back-line {
-      position: absolute;
-      top: 0;
-      left: 100%;
-      width: 2px;
-      height: 100%;
-      background: black;
-      opacity: 0.5;
-      z-index: 2;
-    }
-
-    .left-house .back-line {
-      position: absolute;
-      top: 0;
-      left: 0%;
-      width: 2px;
-      height: 100%;
-      background: black;
-      opacity: 0.5;
-      z-index: 2;
-    }
-
     /* --- Stone animation (restricted between houses) --- */
     .stone {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: calc(10% + 90px); /* start between houses */
+      left: calc(1% + 90px); /* start between houses */
       font-size: 36px;
       animation: stoneSlide 6s linear infinite;
       z-index: 3;
@@ -182,7 +160,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: calc(10% + 60px);
+      left: calc(1% + 60px);
       width: 140px;
       height: 10px;
       background: linear-gradient(
@@ -197,17 +175,17 @@
     }
 
     @keyframes stoneSlide {
-      0%   { left: calc(10% + 90px); }
-      50%  { left: calc(90% - 90px); }
-      100% { left: calc(10% + 90px); }
+      0%   { left: calc(1% + 90px); }
+      50%  { left: calc(99% - 90px); }
+      100% { left: calc(1% + 90px); }
     }
 
     @keyframes trailSlide {
-      0%   { left: calc(10% + 60px); opacity: 0.0; }
+      0%   { left: calc(1% + 60px); opacity: 0.0; }
       10%  { opacity: 0.7; }
-      50%  { left: calc(90% - 120px); opacity: 0.4; }
+      50%  { left: calc(99% - 120px); opacity: 0.4; }
       90%  { opacity: 0.0; }
-      100% { left: calc(10% + 60px); opacity: 0.0; }
+      100% { left: calc(1% + 60px); opacity: 0.0; }
     }
 
     body {
@@ -323,7 +301,6 @@
         <div class="ring yellow-ring"></div>
 
         <div class="tee-line"></div>
-        <div class="back-line"></div>
       </div>
 
       <!-- Right house -->
@@ -334,7 +311,6 @@
         <div class="ring yellow-ring"></div>
 
         <div class="tee-line"></div>
-        <div class="back-line"></div>
       </div>
 
       <div class="stone">🥌</div>
