@@ -153,7 +153,7 @@
       left: calc(1% + 90px); /* start between houses */
       font-size: 36px;
       animation: stoneSlide 6s linear infinite,
-             stoneSpinY 1.5s linear infinite;
+             stoneSpinY 0.8s linear infinite;
       z-index: 3;
     }
 
@@ -165,7 +165,7 @@
 
     @keyframes stoneSpinY {
       0%   { transform: translateY(-50%) rotateY(0deg); }
-      50%  { transform: translateY(-50%) rotateY(35deg); }
+      50% { transform: translateY(-50%) rotateY(180deg)}
       100% { transform: translateY(-50%) rotateY(0deg); }
     }
 
