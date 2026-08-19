@@ -28,72 +28,17 @@
       text-align: left;
     }
 
-    .sheet-center-line {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 4px;
-      height: 100%;
-      background: black;
-      opacity: 0.45;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-
-    .tee-line {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: blue;
-      opacity: 0.55;
-      transform: translateY(-50%);
-      z-index: 2;
-    }
-
-    .hog-line {
-      position: absolute;
-      width: 100%;
-      height: 4px;
-      background: #d62828;
-      opacity: 0.45;
-      z-index: 1;
-    }
-
-    .left-hog {
-      top: calc(50% - 90px); /* 90px = house height */
-    }
-
-    .right-hog {
-      top: calc(50% + 90px);
-    }
-
-    .back-line {
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: #d62828;
-      opacity: 0.45;
-      z-index: 1;
-    }
-
-    .left-back {
-      top: calc(50% - 45px); /* halfway behind left house */
-    }
-
-    .right-back {
-      top: calc(50% + 45px);
-    }
-
+    /* --- Sheet container --- */
     .header-ice-zone {
       position: relative;
-      width: 800px;
+      width: 260px;
       height: 120px;
       background: #ffffff;
       overflow: hidden;
+      border-left: 3px solid #005bbb;
     }
 
+    /* --- Houses --- */
     .house {
       position: absolute;
       top: 50%;
@@ -110,12 +55,12 @@
       right: 10%;
     }
 
+    /* --- Rings --- */
     .house .ring {
       position: absolute;
       border-radius: 50%;
     }
 
-    /* Blue outer ring */
     .blue-ring {
       width: 90px;
       height: 90px;
@@ -123,7 +68,6 @@
       opacity: 0.35;
     }
 
-    /* White ring */
     .white-ring {
       width: 60px;
       height: 60px;
@@ -133,7 +77,6 @@
       opacity: 0.8;
     }
 
-    /* Red ring */
     .red-ring {
       width: 40px;
       height: 40px;
@@ -143,7 +86,6 @@
       opacity: 0.5;
     }
 
-    /* Yellow button */
     .yellow-ring {
       width: 20px;
       height: 20px;
@@ -153,11 +95,64 @@
       opacity: 0.9;
     }
 
+    /* --- Correct sheet markings --- */
+
+    /* Center line: horizontal across entire sheet */
+    .sheet-center-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #005bbb;
+      opacity: 0.45;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    /* Tee line: vertical through center of each house */
+    .tee-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: #d62828;
+      opacity: 0.6;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    /* Back line: vertical behind tee line */
+    .back-line {
+      position: absolute;
+      top: 0;
+      left: 35%;
+      width: 2px;
+      height: 100%;
+      background: #d62828;
+      opacity: 0.5;
+      z-index: 2;
+    }
+
+    /* Hog line: vertical in front of tee line */
+    .hog-line {
+      position: absolute;
+      top: 0;
+      left: 65%;
+      width: 2px;
+      height: 100%;
+      background: #d62828;
+      opacity: 0.5;
+      z-index: 2;
+    }
+
+    /* --- Stone animation (restricted between houses) --- */
     .stone {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: calc(10% + 90px);
+      left: calc(10% + 90px); /* start between houses */
       font-size: 42px;
       animation: stoneSlide 6s linear infinite;
       z-index: 3;
@@ -294,16 +289,8 @@
     <h1>Megan's Curling Games</h1>
     <div class="header-ice-zone">
 
-      <!-- Full sheet center line -->
+      <!-- Full sheet center line (horizontal) -->
       <div class="sheet-center-line"></div>
-
-      <!-- Hog lines -->
-      <div class="hog-line left-hog"></div>
-      <div class="hog-line right-hog"></div>
-
-      <!-- Back lines -->
-      <div class="back-line left-back"></div>
-      <div class="back-line right-back">
 
       <!-- Left house -->
       <div class="house left-house">
@@ -313,6 +300,8 @@
         <div class="ring yellow-ring"></div>
 
         <div class="tee-line"></div>
+        <div class="back-line"></div>
+        <div class="hog-line"></div>
       </div>
 
       <!-- Right house -->
@@ -323,6 +312,8 @@
         <div class="ring yellow-ring"></div>
 
         <div class="tee-line"></div>
+        <div class="back-line"></div>
+        <div class="hog-line"></div>
       </div>
 
       <div class="stone">🥌</div>
