@@ -116,82 +116,82 @@
       return jsonArray;
     }
 
-    var games = loadGamesFromCSV()
+    loadGamesFromCSV().then(games => {
 
-    console.log(games)
+      const now = new Date();
+      const THREE_HOURS = 2.5 * 60 * 60 * 1000;
 
-    const now = new Date();
-    const THREE_HOURS = 2.5 * 60 * 60 * 1000;
+      games.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    games.sort((a, b) => new Date(a.date) - new Date(b.date));
+      let currentGame = null;
+      const futureGames = [];
+      const pastGames = [];
 
-    let currentGame = null;
-    const futureGames = [];
-    const pastGames = [];
+      games.forEach(game => {
+        const start = new Date(game.date);
+        const diff = now - start;
 
-    games.forEach(game => {
-      const start = new Date(game.date);
-      const diff = now - start;
+        if (diff >= 0 && diff <= THREE_HOURS) {
+          currentGame = game;
+        } else if (start > now) {
+          futureGames.push(game);
+        } else {
+          pastGames.push(game);
+        }
+      });
 
-      if (diff >= 0 && diff <= THREE_HOURS) {
-        currentGame = game;
-      } else if (start > now) {
-        futureGames.push(game);
-      } else {
-        pastGames.push(game);
-      }
-    });
+      const nextGame = futureGames[0];
+      const upcomingGames = futureGames.slice(1);
+      
 
-    const nextGame = futureGames[0];
-    const upcomingGames = futureGames.slice(1);
+      function renderGame(game, type = "") {
+        const date = new Date(game.date);
+        return `
+          <div class="card ${type}">
+            <div class="game-time">
+              ${date.toLocaleDateString()}<br>
+              ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            </div>
+            <div class="event">🏆 ${game.event}</div>
+            <div>📍 ${game.location}</div>
 
-    function renderGame(game, type = "") {
-      const date = new Date(game.date);
-      return `
-        <div class="card ${type}">
-          <div class="game-time">
-            ${date.toLocaleDateString()}<br>
-            ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            ${type === "next-game" || type === "current-game" ? `
+              <div class="stream">
+                ${game.stream
+                  ? `📺 <a href="${game.stream}" target="_blank">Stream</a>`
+                  : "📺 No stream"}
+              </div>
+            ` : ""}
+
+            ${type === "past-game" ? `
+              <div class="result">
+                🏁 ${game.result || "No result"}
+              </div>
+            ` : ""}
           </div>
-          <div class="event">🏆 ${game.event}</div>
-          <div>📍 ${game.location}</div>
+        `;
+      }
 
-          ${type === "next-game" || type === "current-game" ? `
-            <div class="stream">
-              ${game.stream
-                ? `📺 <a href="${game.stream}" target="_blank">Stream</a>`
-                : "📺 No stream"}
-            </div>
-          ` : ""}
+      document.getElementById("current-game").innerHTML =
+        currentGame
+          ? renderGame(currentGame, "current-game")
+          : `<div class="empty">No game in progress.</div>`;
 
-          ${type === "past-game" ? `
-            <div class="result">
-              🏁 ${game.result || "No result"}
-            </div>
-          ` : ""}
-        </div>
-      `;
-    }
+      document.getElementById("next-game").innerHTML =
+        nextGame
+          ? renderGame(nextGame, "next-game")
+          : `<div class="empty">No upcoming games.</div>`;
 
-    document.getElementById("current-game").innerHTML =
-      currentGame
-        ? renderGame(currentGame, "current-game")
-        : `<div class="empty">No game in progress.</div>`;
+      document.getElementById("upcoming-games").innerHTML =
+        upcomingGames.length
+          ? upcomingGames.map(g => renderGame(g)).join("")
+          : `<div class="empty">No additional upcoming games.</div>`;
 
-    document.getElementById("next-game").innerHTML =
-      nextGame
-        ? renderGame(nextGame, "next-game")
-        : `<div class="empty">No upcoming games.</div>`;
-
-    document.getElementById("upcoming-games").innerHTML =
-      upcomingGames.length
-        ? upcomingGames.map(g => renderGame(g)).join("")
-        : `<div class="empty">No additional upcoming games.</div>`;
-
-    document.getElementById("past-games").innerHTML =
-      pastGames.length
-        ? pastGames.reverse().map(g => renderGame(g, "past-game")).join("")
-        : `<div class="empty">No past games yet.</div>`;
+      document.getElementById("past-games").innerHTML =
+        pastGames.length
+          ? pastGames.reverse().map(g => renderGame(g, "past-game")).join("")
+          : `<div class="empty">No past games yet.</div>`;
+    });
   </script>
 
 </body>
