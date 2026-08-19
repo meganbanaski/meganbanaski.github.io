@@ -31,11 +31,10 @@
     /* --- Sheet container --- */
     .header-ice-zone {
       position: relative;
-      width: 260px;
+      width: 800px;
       height: 120px;
       background: #ffffff;
       overflow: hidden;
-      border-left: 3px solid #005bbb;
     }
 
     /* --- Houses --- */
@@ -103,8 +102,8 @@
       top: 50%;
       left: 0;
       width: 100%;
-      height: 4px;
-      background: #005bbb;
+      height: 2px;
+      background: black;
       opacity: 0.45;
       transform: translateY(-50%);
       z-index: 1;
@@ -115,9 +114,9 @@
       position: absolute;
       top: 0;
       left: 50%;
-      width: 4px;
+      width: 2px;
       height: 100%;
-      background: #d62828;
+      background: blue;
       opacity: 0.6;
       transform: translateX(-50%);
       z-index: 2;
@@ -127,22 +126,10 @@
     .back-line {
       position: absolute;
       top: 0;
-      left: 35%;
+      left: 100%;
       width: 2px;
       height: 100%;
-      background: #d62828;
-      opacity: 0.5;
-      z-index: 2;
-    }
-
-    /* Hog line: vertical in front of tee line */
-    .hog-line {
-      position: absolute;
-      top: 0;
-      left: 65%;
-      width: 2px;
-      height: 100%;
-      background: #d62828;
+      background: black;
       opacity: 0.5;
       z-index: 2;
     }
@@ -153,7 +140,7 @@
       top: 50%;
       transform: translateY(-50%);
       left: calc(10% + 90px); /* start between houses */
-      font-size: 42px;
+      font-size: 36px;
       animation: stoneSlide 6s linear infinite;
       z-index: 3;
     }
