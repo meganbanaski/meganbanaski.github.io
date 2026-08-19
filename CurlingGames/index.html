@@ -462,8 +462,8 @@
 
       var pastGamesByEvent = groupByEvent(pastGames);
 
-      function buildPastGames(events) {
-        const container = document.getElementById("past-games");
+      function buildPastGames(eventsByName) {
+        const container = document.getElementById("pastGames");
         container.innerHTML = "";
 
         Object.keys(eventsByName).forEach(eventName => {
