@@ -472,7 +472,7 @@
           .sort((a, b) => b.latestDate - a.latestDate); // newest → oldest
       }
 
-      function buildPastGames(eventsByName) {
+      function buildPastGames(sortedEvents) {
         const container = document.getElementById("past-games");
         container.innerHTML = "";
 
