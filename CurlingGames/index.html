@@ -61,10 +61,28 @@
       opacity: 0.4;
     }
 
-    .header-ice-zone .house {
+    .header-ice-zone .right-house {
       position: absolute;
       top: 50%;
       left: 80%;
+      transform: translate(-50%, -50%);
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,1) 0%,
+        rgba(247,201,72,0.4) 40%,
+        rgba(214,40,40,0.4) 70%,
+        rgba(0,91,187,0.4) 100%
+      );
+      opacity: 0.35;
+    }
+
+    .header-ice-zone .left-house {
+      position: absolute;
+      top: 50%;
+      left: 20%;
       transform: translate(-50%, -50%);
       width: 90px;
       height: 90px;
@@ -222,7 +240,8 @@
   <header class="site-header">
     <h1>Curling Games</h1>
     <div class="header-ice-zone">
-      <div class="house"></div>
+      <div class="left-house"></div>
+      <div class="right-house"></div>
       <div class="stone">🥌</div>
       <div class="trail"></div>
     </div>
