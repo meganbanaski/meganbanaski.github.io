@@ -445,7 +445,7 @@
       }
 
       function buildPastGames(events) {
-        const container = document.getElementById("pastGames");
+        const container = document.getElementById("past-games");
         container.innerHTML = "";
 
         events.forEach(event => {
@@ -508,11 +508,7 @@
           ? upcomingGames.map(g => renderGame(g)).join("")
           : `<div class="empty">No additional upcoming games.</div>`;
 
-      // document.getElementById("past-games").innerHTML =
-      //   pastGames.length
-      //     ? pastGames.reverse().map(g => renderGame(g, "past-game")).join("")
-      //     : `<div class="empty">No past games yet.</div>`;
-      buildPastGames(games);
+      buildPastGames(allEvents);
     });
   </script>
 
