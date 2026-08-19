@@ -152,14 +152,21 @@
       transform: translateY(-50%);
       left: calc(1% + 90px); /* start between houses */
       font-size: 36px;
-      animation: stoneSlide 6s linear infinite;
+      animation: stoneSlide 6s linear infinite,
+             stoneSpinY 1.5s linear infinite;
       z-index: 3;
     }
 
     @keyframes stoneSlide {
-      0%   { left: calc(1% + 90px); }
+      0%   { left: calc(1% + 45px); }
       50%  { left: calc(99% - 90px); }
-      100% { left: calc(1% + 90px); }
+      100% { left: calc(1% + 45px); }
+    }
+
+    @keyframes stoneSpinY {
+      0%   { transform: translateY(-50%) rotateY(0deg); }
+      50%  { transform: translateY(-50%) rotateY(35deg); }
+      100% { transform: translateY(-50%) rotateY(0deg); }
     }
 
     body {
