@@ -14,10 +14,24 @@
     }
 
     header {
-      background: linear-gradient(90deg, #005bbb, #d62828, #f7c948);
-      color: white;
-      padding: 25px;
-      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "🥌";
+      font-size: 42px;
+      position: absolute;
+      left: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      animation: slideStone 7s linear infinite;
+    }
+
+    @keyframes slideStone {
+      0% { left: -60px; }
+      50% { left: calc(100% + 60px); }
+      100% { left: -60px; }
     }
 
     body {
@@ -116,7 +130,7 @@
 </head>
 <body>
   <header>
-    <h1>🥌 Megan's Curling Games</h1>
+    <h1>Megan's Curling Games</h1>
   </header>
 
   <h2>Current Game</h2>
