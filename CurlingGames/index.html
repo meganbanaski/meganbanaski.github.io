@@ -261,6 +261,54 @@
       color: #777;
       font-style: italic;
     }
+
+    .event-expander {
+      margin: 12px 0;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
+      padding: 0;
+      border: 1px solid #cce0ff;
+    }
+
+    .event-expander summary {
+      cursor: pointer;
+      padding: 12px 16px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: #e8f2ff;
+      border-radius: 10px;
+    }
+
+    .event-expander summary:hover {
+      background: #d9ebff;
+    }
+
+    .event-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 20px 0;
+    }
+
+    .event-table th, .event-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .event-table th {
+      background: #f0f7ff;
+      font-weight: bold;
+    }
+
+    .win {
+      color: #0a6;
+      font-weight: bold;
+    }
+
+    .loss {
+      color: #c00;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -309,7 +357,7 @@
   <div id="upcoming-games" class="grid"></div>
 
   <h2>Past Games</h2>
-  <div id="past-games" class="grid"></div>
+  <div id="past-games"></div>
 
   <script>
     async function loadGamesFromCSV() {
@@ -396,6 +444,55 @@
         `;
       }
 
+      function buildPastGames(events) {
+        const container = document.getElementById("pastGames");
+        container.innerHTML = "";
+
+        events.forEach(event => {
+          // Create expander
+          const expander = document.createElement("details");
+          expander.className = "event-expander";
+
+          const summary = document.createElement("summary");
+          summary.textContent = event.eventName;
+          expander.appendChild(summary);
+
+          // Create table
+          const table = document.createElement("table");
+          table.className = "event-table";
+
+          table.innerHTML = `
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Opponent</th>
+                <th>Score</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          `;
+
+          const tbody = table.querySelector("tbody");
+
+          event.games.forEach(game => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+              <td>${game.date}</td>
+              <td>${game.opponent}</td>
+              <td>${game.score}</td>
+              <td class="${game.result.toLowerCase()}">${game.result}</td>
+            `;
+
+            tbody.appendChild(row);
+          });
+
+          expander.appendChild(table);
+          container.appendChild(expander);
+        });
+      }
+
       document.getElementById("current-game").innerHTML =
         currentGame
           ? renderGame(currentGame, "current-game")
@@ -411,10 +508,11 @@
           ? upcomingGames.map(g => renderGame(g)).join("")
           : `<div class="empty">No additional upcoming games.</div>`;
 
-      document.getElementById("past-games").innerHTML =
-        pastGames.length
-          ? pastGames.reverse().map(g => renderGame(g, "past-game")).join("")
-          : `<div class="empty">No past games yet.</div>`;
+      // document.getElementById("past-games").innerHTML =
+      //   pastGames.length
+      //     ? pastGames.reverse().map(g => renderGame(g, "past-game")).join("")
+      //     : `<div class="empty">No past games yet.</div>`;
+      buildPastGames(allEvents);
     });
   </script>
 
