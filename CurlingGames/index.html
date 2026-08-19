@@ -14,40 +14,58 @@
     }
 
     .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 20px;
+      border-bottom: 6px solid #005bbb;
+      background: #f0f7ff;
       position: relative;
-      padding: 40px 20px;
-      text-align: center;
+    }
+
+    /* Left text */
+    .site-header h1 {
+      margin: 0;
+      font-size: 2.4rem;
+      text-align: left;
+    }
+
+    /* Right ice zone */
+    .header-ice-zone {
+      position: relative;
+      width: 260px;       /* adjust width as you like */
+      height: 60px;
       background: linear-gradient(
         to bottom,
         #e8f4ff 0%,
         #d9ecff 40%,
         #c7e0f7 100%
       );
-      border-bottom: 6px solid #005bbb;
+      border-left: 3px solid #005bbb;
       overflow: hidden;
     }
 
     /* Curling stone */
-    .site-header::after {
+    .header-ice-zone::after {
       content: "🥌";
       font-size: 42px;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: calc(50% + 120px); /* starts just to the right of your h1 */
+      left: -60px;
       animation: stoneSlide 6s linear infinite;
       z-index: 3;
     }
 
     /* Ice trail */
-    .site-header::before {
+    .header-ice-zone::before {
       content: "";
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: calc(50% + 80px);
-      width: 160px;
-      height: 12px;
+      left: -120px;
+      width: 140px;
+      height: 10px;
       background: linear-gradient(
         to right,
         rgba(255,255,255,0.0),
@@ -60,17 +78,17 @@
     }
 
     @keyframes stoneSlide {
-      0%   { left: calc(50% + 120px); }
+      0%   { left: -60px; }
       50%  { left: calc(100% + 60px); }
-      100% { left: calc(50% + 120px); }
+      100% { left: -60px; }
     }
 
     @keyframes trailSlide {
-      0%   { left: calc(50% + 80px); opacity: 0.0; }
+      0%   { left: -120px; opacity: 0.0; }
       10%  { opacity: 0.7; }
-      50%  { left: calc(100% + 200px); opacity: 0.4; }
+      50%  { left: calc(100% + 120px); opacity: 0.4; }
       90%  { opacity: 0.0; }
-      100% { left: calc(50% + 80px); opacity: 0.0; }
+      100% { left: -120px; opacity: 0.0; }
     }
 
     body {
@@ -169,8 +187,10 @@
 </head>
 <body>
   <header class="site-header">
-    <h1>Megan's Curling Games</h1>
+    <h1>Curling Games</h1>
+    <div class="header-ice-zone"></div>
   </header>
+
 
   <h2>Current Game</h2>
   <div id="current-game" class="grid"></div>
