@@ -21,13 +21,16 @@
       padding: 40px 20px;
       text-align: center;
 
-      /* REQUIRED for animation visibility */
-      position: relative;
-      overflow: hidden;
-      min-height: 140px;
+      /* REQUIRED FIXES */
+      position: relative;     /* allows pseudo-elements to position */
+      overflow: hidden;       /* prevents clipping */
+      min-height: 140px;      /* gives animation room */
+      isolation: isolate;     /* ensures pseudo-elements appear above background */
 
-      /* Make animation stand out */
-      isolation: isolate;
+      /* keep your flex layout */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Curling stone */
