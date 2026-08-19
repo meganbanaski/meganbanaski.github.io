@@ -148,7 +148,7 @@
     /* --- Stone animation (restricted between houses) --- */
     .stone {
       position: absolute;
-      top: 50%;
+      top: 0%;
       transform: translateY(-50%);
       left: calc(1% + 90px); /* start between houses */
       font-size: 36px;
@@ -156,36 +156,10 @@
       z-index: 3;
     }
 
-    .trail {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: calc(1% + 60px);
-      width: 140px;
-      height: 10px;
-      background: linear-gradient(
-        to right,
-        rgba(255,255,255,0.0),
-        rgba(255,255,255,0.6),
-        rgba(255,255,255,0.0)
-      );
-      filter: blur(6px);
-      animation: trailSlide 6s linear infinite;
-      z-index: 2;
-    }
-
     @keyframes stoneSlide {
       0%   { left: calc(1% + 90px); }
       50%  { left: calc(99% - 90px); }
       100% { left: calc(1% + 90px); }
-    }
-
-    @keyframes trailSlide {
-      0%   { left: calc(1% + 60px); opacity: 0.0; }
-      10%  { opacity: 0.7; }
-      50%  { left: calc(99% - 120px); opacity: 0.4; }
-      90%  { opacity: 0.0; }
-      100% { left: calc(1% + 60px); opacity: 0.0; }
     }
 
     body {
@@ -314,7 +288,6 @@
       </div>
 
       <div class="stone">🥌</div>
-      <div class="trail"></div>
     </div>
 
   </header>
