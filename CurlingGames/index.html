@@ -13,25 +13,64 @@
       --dark: #333;
     }
 
-    header {
+    .site-header {
       position: relative;
+      padding: 40px 20px;
+      text-align: center;
+      background: linear-gradient(
+        to bottom,
+        #e8f4ff 0%,
+        #d9ecff 40%,
+        #c7e0f7 100%
+      );
+      border-bottom: 6px solid #005bbb;
       overflow: hidden;
     }
 
-    header::after {
+    /* Curling stone */
+    .site-header::after {
       content: "🥌";
       font-size: 42px;
       position: absolute;
-      left: -60px;
       top: 50%;
       transform: translateY(-50%);
-      animation: slideStone 7s linear infinite;
+      left: calc(50% + 120px); /* starts just to the right of your h1 */
+      animation: stoneSlide 6s linear infinite;
+      z-index: 3;
     }
 
-    @keyframes slideStone {
-      0% { left: -60px; }
-      50% { left: calc(100% + 60px); }
-      100% { left: -60px; }
+    /* Ice trail */
+    .site-header::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: calc(50% + 80px);
+      width: 160px;
+      height: 12px;
+      background: linear-gradient(
+        to right,
+        rgba(255,255,255,0.0),
+        rgba(255,255,255,0.6),
+        rgba(255,255,255,0.0)
+      );
+      filter: blur(6px);
+      animation: trailSlide 6s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes stoneSlide {
+      0%   { left: calc(50% + 120px); }
+      50%  { left: calc(100% + 60px); }
+      100% { left: calc(50% + 120px); }
+    }
+
+    @keyframes trailSlide {
+      0%   { left: calc(50% + 80px); opacity: 0.0; }
+      10%  { opacity: 0.7; }
+      50%  { left: calc(100% + 200px); opacity: 0.4; }
+      90%  { opacity: 0.0; }
+      100% { left: calc(50% + 80px); opacity: 0.0; }
     }
 
     body {
@@ -129,7 +168,7 @@
   </style>
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <h1>Megan's Curling Games</h1>
   </header>
 
