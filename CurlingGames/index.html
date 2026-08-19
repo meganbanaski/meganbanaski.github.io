@@ -88,190 +88,25 @@
   <div id="past-games" class="grid"></div>
 
   <script>
-    const games = [
-      {
-        date: "2026-01-09T12:00",
-        location: "St Paul Curling Club",
-        event: "Big Spiel",
-        stream: "https://www.youtube.com/watch?v=hbHEa4qaJ1M",
-        result: "Win"
-      },
-      {
-        date: "2026-01-09T18:00",
-        location: "Frogtown Curling Club | Sheet C",
-        event: "Big Spiel",
-        stream: "https://youtube.com/@frogtowncurling?si=7QdOOLdLtUU8Rctt",
-        result: "Win"
-      },
-      {
-        date: "2026-01-10T10:30",
-        location: "Four Seasons Curling Club | Sheet B",
-        event: "Big Spiel",
-        stream: "https://youtube.com/@fourseasonscurlingcenter?si=Lt8pnb8gXogliMPs",
-        result: "Win"
-      },
-      {
-        date: "2026-01-10T17:30",
-        location: "Chaska Curling Club | Sheet 3",
-        event: "Big Spiel",
-        stream: "https://youtube.com/@chaskacurlingcenter?si=aBuA6H7Lm-0ISdO3",
-        result: "Loss"
-      },
-      {
-        date: "2026-01-15T12:30",
-        location: "Stevens Point Curling Club | Sheet B",
-        event: "Wisconsin Club Playdowns",
-        stream: "https://www.youtube.com/@PointCurling/streams",
-        result: "Loss"
-      },
-      {
-        date: "2026-01-15T17:00",
-        location: "Stevens Point Curling Club | Sheet D",
-        event: "Wisconsin Club Playdowns",
-        stream: "https://www.youtube.com/@PointCurling/streams",
-        result: "Win"
-      },
-      {
-        date: "2026-01-16T08:00",
-        location: "Stevens Point Curling Club | Sheet A",
-        event: "Wisconsin Club Playdowns",
-        stream: "https://www.youtube.com/@PointCurling/streams",
-        result: "Win"
-      },
-      {
-        date: "2026-01-16T14:30",
-        location: "Stevens Point Curling Club | Sheet B",
-        event: "Wisconsin Club Playdowns",
-        stream: "https://www.youtube.com/@PointCurling/streams",
-        result: "Win"
-      },
-      {
-        date: "2026-01-16T21:00",
-        location: "Stevens Point Curling Club | Sheet B",
-        event: "Wisconsin Club Playdowns",
-        stream: "https://www.youtube.com/@PointCurling/streams",
-        result: "Loss"
-      },
-      {
-        date: "2026-01-17T12:00",
-        location: "Stevens Point Curling Club | Sheet C",
-        event: "Wisconsin Club Playdowns",
-        stream: "https://www.youtube.com/@PointCurling/streams",
-        result: "Loss"
-      },
-      {
-        date: "2026-01-30T20:45",
-        location: "Medford Curling Club",
-        event: "Running Tree Maple Syrup Spiel",
-        stream: null,
-        result: "Loss"
-      },
-      {
-        date: "2026-01-31T10:00",
-        location: "Medford Curling Club",
-        event: "Running Tree Maple Syrup Spiel",
-        stream: null,
-        result: "Win"
-      },
-      {
-        date: "2026-01-31T16:00",
-        location: "Medford Curling Club",
-        event: "Running Tree Maple Syrup Spiel",
-        stream: null,
-        result: "Loss"
-      },
-      {
-        date: "2026-02-20T11:00",
-        location: "Racine Curling Club | Sheet 2",
-        event: "Wisconsin Mixed Playdowns",
-        stream: "https://www.youtube.com/@RacineCurlingClub",
-        result: "Loss"
-      },
-      {
-        date: "2026-02-20T17:30",
-        location: "Racine Curling Club | Sheet 1",
-        event: "Wisconsin Mixed Playdowns",
-        stream: "https://www.youtube.com/@RacineCurlingClub",
-        result: "Loss"
-      },
-      {
-        date: "2026-02-21T08:00",
-        location: "Racine Curling Club | Sheet 1",
-        event: "Wisconsin Mixed Playdowns",
-        stream: "https://www.youtube.com/@RacineCurlingClub",
-        result: "Win"
-      },
-      {
-        date: "2026-02-21T21:00",
-        location: "Racine Curling Club | Sheet 2",
-        event: "Wisconsin Mixed Playdowns",
-        stream: "https://www.youtube.com/@RacineCurlingClub",
-        result: "Loss"
-      },
-      {
-        date: "2026-03-06T19:30",
-        location: "Dakota Curling Club",
-        event: "Double Trouble Spiel",
-        stream: "",
-        result: "Win"
-      },
-      {
-        date: "2026-03-07T08:00",
-        location: "Dakota Curling Club",
-        event: "Double Trouble Spiel",
-        stream: "",
-        result: "Loss"
-      },
-      {
-        date: "2026-03-07T13:45",
-        location: "Dakota Curling Club",
-        event: "Double Trouble Spiel",
-        stream: "",
-        result: "Win"
-      },
-      {
-        date: "2026-03-08T08:00",
-        location: "Dakota Curling Club",
-        event: "Double Trouble Spiel",
-        stream: "https://youtube.com/@curlingstadiumdakota?si=0kDZRPeBTmlqyVvQ",
-        result: ""
-      },
-      {
-        date: "2026-04-10T13:00",
-        location: "Granite Curling Club | Sheet 5",
-        event: "April Spiel",
-        stream: "https://www.youtube.com/live/8AoSnCRfrEQ?si=vBuP0il7le9h3Kdt",
-        result: "Win"
-      },
-      {
-        date: "2026-04-10T19:00",
-        location: "Granite Curling Club | Sheet 1",
-        event: "April Spiel",
-        stream: "https://youtube.com/@curlingseattlelive?si=nL2y65L91iCsb5zX",
-        result: "Loss"
-      },
-      {
-        date: "2026-04-11T09:15",
-        location: "Granite Curling Club | Sheet 3",
-        event: "April Spiel",
-        stream: "https://youtube.com/@curlingseattlelive?si=nL2y65L91iCsb5zX",
-        result: "Win"
-      },
-      {
-        date: "2026-04-12T01:00",
-        location: "Granite Curling Club | Sheet 5",
-        event: "April Spiel",
-        stream: "https://youtube.com/@curlingseattlelive?si=nL2y65L91iCsb5zX",
-        result: "Win"
-      },
-      {
-        date: "2026-04-12T12:30",
-        location: "Granite Curling Club | Sheet 2",
-        event: "April Spiel",
-        stream: "https://youtube.com/@curlingseattlelive?si=nL2y65L91iCsb5zX",
-        result: ""
-      },
-    ];
+    async function loadGamesFromCSV() {
+      const response = await fetch("games.csv");
+      const text = await response.text();
+
+      const rows = text.trim().split("\n").map(r => r.split(","));
+      const headers = rows.shift(); // ["date","location","event","stream","result"]
+
+      const games = rows.map(row => {
+        const obj = {};
+        headers.forEach((h, i) => {
+          obj[h] = row[i] === "" ? null : row[i];
+        });
+        return obj;
+      });
+
+      return games;
+    }
+
+    var games = loadGamesFromCSV()
 
     const now = new Date();
     const THREE_HOURS = 2.5 * 60 * 60 * 1000;
