@@ -476,10 +476,7 @@
         const container = document.getElementById("past-games");
         container.innerHTML = "";
 
-        Object.keys(eventsByName).forEach(eventName => {
-          const games = eventsByName[eventName];
-
-          // Create expander
+        sortedEvents.forEach(({ eventName, games }) => {
           const expander = document.createElement("details");
           expander.className = "event-expander";
 
@@ -487,7 +484,6 @@
           summary.textContent = eventName;
           expander.appendChild(summary);
 
-          // Create table
           const table = document.createElement("table");
           table.className = "event-table";
 
