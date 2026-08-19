@@ -28,6 +28,64 @@
       text-align: left;
     }
 
+    .sheet-center-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: black;
+      opacity: 0.45;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .tee-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: blue;
+      opacity: 0.55;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .hog-line {
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      background: #d62828;
+      opacity: 0.45;
+      z-index: 1;
+    }
+
+    .left-hog {
+      top: calc(50% - 90px); /* 90px = house height */
+    }
+
+    .right-hog {
+      top: calc(50% + 90px);
+    }
+
+    .back-line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #d62828;
+      opacity: 0.45;
+      z-index: 1;
+    }
+
+    .left-back {
+      top: calc(50% - 45px); /* halfway behind left house */
+    }
+
+    .right-back {
+      top: calc(50% + 45px);
+    }
+
     .header-ice-zone {
       position: relative;
       width: 800px;
@@ -95,24 +153,21 @@
       opacity: 0.9;
     }
 
-    /* Curling stone */
-    .header-ice-zone .stone {
-      content: "🥌";
-      font-size: 42px;
+    .stone {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: -60px;
+      left: calc(10% + 90px);
+      font-size: 42px;
       animation: stoneSlide 6s linear infinite;
       z-index: 3;
     }
 
-    /* Ice trail */
-    .header-ice-zone .trail {
+    .trail {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: -120px;
+      left: calc(10% + 60px);
       width: 140px;
       height: 10px;
       background: linear-gradient(
@@ -127,17 +182,17 @@
     }
 
     @keyframes stoneSlide {
-      0%   { left: -60px; }
-      50%  { left: calc(100% + 60px); }
-      100% { left: -60px; }
+      0%   { left: calc(10% + 90px); }
+      50%  { left: calc(90% - 90px); }
+      100% { left: calc(10% + 90px); }
     }
 
     @keyframes trailSlide {
-      0%   { left: -120px; opacity: 0.0; }
+      0%   { left: calc(10% + 60px); opacity: 0.0; }
       10%  { opacity: 0.7; }
-      50%  { left: calc(100% + 120px); opacity: 0.4; }
+      50%  { left: calc(90% - 120px); opacity: 0.4; }
       90%  { opacity: 0.0; }
-      100% { left: -120px; opacity: 0.0; }
+      100% { left: calc(10% + 60px); opacity: 0.0; }
     }
 
     body {
@@ -236,25 +291,44 @@
 </head>
 <body>
   <header class="site-header">
-    <h1>Curling Games</h1>
+    <h1>Megan's Curling Games</h1>
     <div class="header-ice-zone">
+
+      <!-- Full sheet center line -->
+      <div class="sheet-center-line"></div>
+
+      <!-- Hog lines -->
+      <div class="hog-line left-hog"></div>
+      <div class="hog-line right-hog"></div>
+
+      <!-- Back lines -->
+      <div class="back-line left-back"></div>
+      <div class="back-line right-back">
+
+      <!-- Left house -->
       <div class="house left-house">
         <div class="ring blue-ring"></div>
         <div class="ring white-ring"></div>
         <div class="ring red-ring"></div>
         <div class="ring yellow-ring"></div>
+
+        <div class="tee-line"></div>
       </div>
 
+      <!-- Right house -->
       <div class="house right-house">
         <div class="ring blue-ring"></div>
         <div class="ring white-ring"></div>
         <div class="ring red-ring"></div>
         <div class="ring yellow-ring"></div>
+
+        <div class="tee-line"></div>
       </div>
 
       <div class="stone">🥌</div>
       <div class="trail"></div>
     </div>
+
   </header>
 
   <h2>Current Game</h2>
