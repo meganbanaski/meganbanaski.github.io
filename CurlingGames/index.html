@@ -13,79 +13,6 @@
       --dark: #333;
     }
 
-    .header {
-      background-image: url("curlingheader.png");
-      background-size: cover;
-      background-position: center;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-
-      /* REQUIRED FIXES */
-      position: relative;     /* allows pseudo-elements to position */
-      overflow: hidden;       /* prevents clipping */
-      min-height: 140px;      /* gives animation room */
-      isolation: isolate;     /* ensures pseudo-elements appear above background */
-
-      /* keep your flex layout */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Curling stone */
-    .header::after {
-      content: "🥌";
-      font-size: 42px;
-      position: absolute;
-      left: -80px;
-      top: 50%;
-      transform: translateY(-50%);
-      animation: stoneSlide 7s linear infinite;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    /* Ice trail */
-    .header::before {
-      content: "";
-      position: absolute;
-      left: -200px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 180px;
-      height: 12px;
-
-      background: linear-gradient(
-        to right,
-        rgba(255,255,255,0.0),
-        rgba(255,255,255,0.7),
-        rgba(255,255,255,0.0)
-      );
-
-      filter: blur(6px);
-      animation: trailSlide 7s linear infinite;
-      z-index: 2;
-      pointer-events: none;
-
-      /* Make trail visible over background image */
-      mix-blend-mode: screen;
-    }
-
-    @keyframes stoneSlide {
-      0% { left: -80px; }
-      50% { left: calc(100% + 80px); }
-      100% { left: -80px; }
-    }
-
-    @keyframes trailSlide {
-      0% { left: -200px; opacity: 0.0; }
-      10% { opacity: 0.8; }
-      50% { left: calc(100% + 200px); opacity: 0.4; }
-      90% { opacity: 0.0; }
-      100% { left: -200px; opacity: 0.0; }
-    }
-
     body {
       font-family: Arial, sans-serif;
       background: #f5f5f5;
@@ -118,6 +45,7 @@
       background: var(--red);
       color: white;
     }
+
 
     /* CARD STYLES */
     .card {
@@ -181,7 +109,7 @@
 </head>
 <body>
 
-  <h1>Megan's Curling Games</h1>
+  <h1>🥌 Megan's Curling Games</h1>
 
   <h2>Current Game</h2>
   <div id="current-game" class="grid"></div>
