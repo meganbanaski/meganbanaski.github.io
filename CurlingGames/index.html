@@ -28,43 +28,34 @@
       text-align: left;
     }
 
-    /* Right ice zone becomes a real curling sheet */
     .header-ice-zone {
       position: relative;
-      width: 550px;
+      width: 260px;
       height: 120px;
-      background: #ffffff; /* clean ice */
+      background: #ffffff;
       overflow: hidden;
+      border-left: 3px solid #005bbb;
     }
 
-    /* Hog line */
-    .header-ice-zone::after {
-      content: "";
+    .house {
       position: absolute;
       top: 50%;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: #d62828;
-      opacity: 0.4;
-    }
-
-    .header-ice-zone .right-house {
-      position: absolute;
-      top: 50%;
-      left: 90%;
-      transform: translate(-50%, -50%);
+      transform: translateY(-50%);
       width: 90px;
       height: 90px;
     }
 
-    .header-ice-zone .left-house {
-      position: absolute;
-      top: 50%;
+    .left-house {
       left: 10%;
-      transform: translate(-50%, -50%);
-      width: 90px;
-      height: 90px;
+    }
+
+    .right-house {
+      right: 10%;
+    }
+
+    .house .ring {
+      position: absolute;
+      border-radius: 50%;
     }
 
     /* Blue outer ring */
@@ -248,22 +239,24 @@
   <header class="site-header">
     <h1>Curling Games</h1>
     <div class="header-ice-zone">
-      <div class="left-house">
+      <div class="house left-house">
         <div class="ring blue-ring"></div>
         <div class="ring white-ring"></div>
         <div class="ring red-ring"></div>
-        <div class="ring yellow-ring">
+        <div class="ring yellow-ring"></div>
       </div>
-      <div class="right-house">
+
+      <div class="house right-house">
         <div class="ring blue-ring"></div>
         <div class="ring white-ring"></div>
         <div class="ring red-ring"></div>
-        <div class="ring yellow-ring">
+        <div class="ring yellow-ring"></div>
       </div>
+
       <div class="stone">🥌</div>
       <div class="trail"></div>
     </div>
-  </header>
+
 
 
   <h2>Current Game</h2>
