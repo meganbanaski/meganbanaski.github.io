@@ -460,7 +460,16 @@
         return events;
       };
 
-      var pastGamesByEvent = groupByEvent(pastGames);
+      function sortEventsByLatestDate(eventsByName) {
+        return Object.entries(eventsByName)
+          .map(([eventName, games]) => {
+            const latestDate = new Date(
+              Math.max(...games.map(g => new Date(g.date)))
+            );
+            return { eventName, games, latestDate };
+          })
+          .sort((a, b) => b.latestDate - a.latestDate); // newest → oldest
+      }
 
       function buildPastGames(eventsByName) {
         const container = document.getElementById("past-games");
@@ -528,7 +537,9 @@
           ? upcomingGames.map(g => renderGame(g)).join("")
           : `<div class="empty">No additional upcoming games.</div>`;
 
-      buildPastGames(pastGamesByEvent);
+      var pastGamesByEvent = groupByEvent(pastGames);
+      var sortPastGamesByEvent = sortEventsByLatestDate(pastGamesByEvent);
+      buildPastGames(sortPastGamesByEvent);
     });
   </script>
 
