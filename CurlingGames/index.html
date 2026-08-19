@@ -15,31 +15,65 @@
     header {
       background: #005bbb;
       color: white;
-      padding: 30px 20px;
+      padding: 40px 20px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      border-bottom: 6px solid #d62828;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
 
+    /* Curling stone */
     header::after {
       content: "🥌";
-      font-size: 40px;
+      font-size: 42px;
       position: absolute;
-      left: -50px;
+      left: -80px;
       top: 50%;
       transform: translateY(-50%);
-      animation: slideStone 6s linear infinite;
+      animation: stoneSlide 7s linear infinite;
+      z-index: 3;
     }
 
-    @keyframes slideStone {
-      0% { left: -60px; }
-      50% { left: calc(100% + 60px); }
-      100% { left: -60px; }
+    /* Ice trail */
+    header::before {
+      content: "";
+      position: absolute;
+      left: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 180px;
+      height: 12px;
+      background: linear-gradient(
+        to right,
+        rgba(255,255,255,0.0),
+        rgba(255,255,255,0.6),
+        rgba(255,255,255,0.0)
+      );
+      filter: blur(6px);
+      animation: trailSlide 7s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes stoneSlide {
+      0% { left: -80px; }
+      50% { left: calc(100% + 80px); }
+      100% { left: -80px; }
+    }
+
+    @keyframes trailSlide {
+      0% { left: -200px; opacity: 0.0; }
+      10% { opacity: 0.7; }
+      50% { left: calc(100% + 200px); opacity: 0.4; }
+      90% { opacity: 0.0; }
+      100% { left: -200px; opacity: 0.0; }
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       margin: 0;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     body {
@@ -137,7 +171,7 @@
 </head>
 <body>
 
-  <h1>🥌 Megan's Curling Games</h1>
+  <h1>Megan's Curling Games</h1>
 
   <h2>Current Game</h2>
   <div id="current-game" class="grid"></div>
