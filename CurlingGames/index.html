@@ -426,6 +426,7 @@
             </div>
             <div class="event">🏆 ${game.event}</div>
             <div>📍 ${game.location}</div>
+            <div>📄 ${game.sheet}</div>
 
             ${type === "next-game" || type === "current-game" ? `
               <div class="stream">
@@ -495,7 +496,7 @@
               <tr>
                 <th>Date</th>
                 <th>Location</th>
-                <th>Stream</th>
+                <th>Sheet</th>
                 <th>Result</th>
               </tr>
             </thead>
@@ -510,7 +511,7 @@
             row.innerHTML = `
               <td>${game.date}</td>
               <td>${game.location}</td>
-              <td>${game.stream ? `<a href="${game.stream}" target="_blank">Watch</a>` : ""}</td>
+              <td>${game.sheet}</td>
               <td class="${game.result.toLowerCase()}">${game.result || ""}</td>
             `;
 
