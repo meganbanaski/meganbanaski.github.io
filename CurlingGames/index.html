@@ -444,17 +444,37 @@
         `;
       }
 
+      function groupByEvent(rows) {
+        const events = {};
+
+        rows.forEach(row => {
+          const eventName = row.event;
+
+          if (!events[eventName]) {
+            events[eventName] = [];
+          }
+
+          events[eventName].push(row);
+        });
+
+        return events;
+      };
+
+      var pastGamesByEvent = groupByEvent(pastGames);
+
       function buildPastGames(events) {
         const container = document.getElementById("past-games");
         container.innerHTML = "";
 
-        events.forEach(event => {
+        Object.keys(eventsByName).forEach(eventName => {
+          const games = eventsByName[eventName];
+
           // Create expander
           const expander = document.createElement("details");
           expander.className = "event-expander";
 
           const summary = document.createElement("summary");
-          summary.textContent = event.eventName;
+          summary.textContent = eventName;
           expander.appendChild(summary);
 
           // Create table
@@ -465,8 +485,8 @@
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Opponent</th>
-                <th>Score</th>
+                <th>Location</th>
+                <th>Stream</th>
                 <th>Result</th>
               </tr>
             </thead>
@@ -475,14 +495,14 @@
 
           const tbody = table.querySelector("tbody");
 
-          event.games.forEach(game => {
+          games.forEach(game => {
             const row = document.createElement("tr");
 
             row.innerHTML = `
               <td>${game.date}</td>
-              <td>${game.opponent}</td>
-              <td>${game.score}</td>
-              <td class="${game.result.toLowerCase()}">${game.result}</td>
+              <td>${game.location}</td>
+              <td>${game.stream ? `<a href="${game.stream}" target="_blank">Watch</a>` : ""}</td>
+              <td class="${game.result.toLowerCase()}">${game.result || ""}</td>
             `;
 
             tbody.appendChild(row);
