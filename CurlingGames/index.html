@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="icon" type="image/png" href="favicon.png">
   <title>Megan's Curling Schedule</title>
   <style>
@@ -11,6 +13,17 @@
       --red: #d62828;
       --yellow: #f7c948;
       --dark: #333;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #f7c948, #d62828);
+      background-size: 200% 100%;
+      animation: sweep 0.4s linear forwards;
+    }
+
+    @keyframes sweep {
+      from { background-position: 200% 0; }
+      to { background-position: 0 0; }
     }
 
     .site-header {
@@ -263,12 +276,18 @@
     }
 
     .event-expander {
-      margin: 12px 0;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(6px);
-      padding: 0;
-      border: 1px solid #cce0ff;
+      margin: 16px 0;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.35);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.4);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .event-expander[open] {
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
     }
 
     .event-expander summary {
@@ -308,6 +327,45 @@
     .loss {
       color: #c00;
       font-weight: bold;
+    }
+
+    #viewToggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    #viewToggle button {
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: none;
+      background: #e8f3ff;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    #viewToggle button.active {
+      background: #1565c0;
+      color: white;
+    }
+
+    #curlingMap {
+      margin-bottom: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+
+    #mapSection {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    #mapResults {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 0;
     }
   </style>
 </head>
@@ -357,7 +415,20 @@
   <div id="upcoming-games" class="grid"></div>
 
   <h2>Past Games</h2>
-  <div id="past-games"></div>
+  <div id="viewToggle">
+    <button id="mapViewBtn" class="active">Map View</button>
+    <button id="listViewBtn">List View</button>
+  </div>
+
+  <div id="mapView">
+    <div id="mapSection">
+      <div id="curlingMap" style="height: 350px; width:50%; border-radius: 12px;"></div>
+      <div id="mapResults">
+        <div class="card">Select a curling club on the map to view past games at that location.</div>
+      </div>
+    </div>
+  </div>
+  <div id="past-games" style="display:none;"></div>
 
   <script>
     async function loadGamesFromCSV() {
@@ -537,6 +608,79 @@
       var pastGamesByEvent = groupByEvent(pastGames);
       var sortPastGamesByEvent = sortEventsByLatestDate(pastGamesByEvent);
       buildPastGames(sortPastGamesByEvent);
+
+      document.getElementById("listViewBtn").onclick = () => {
+        document.getElementById("mapView").style.display = "none";
+        document.getElementById("past-games").style.display = "block";
+        listViewBtn.classList.add("active");
+        mapViewBtn.classList.remove("active");
+      };
+
+      document.getElementById("mapViewBtn").onclick = () => {
+        document.getElementById("past-games").style.display = "none";
+        document.getElementById("mapView").style.display = "block";
+        mapViewBtn.classList.add("active");
+        listViewBtn.classList.remove("active");
+
+        if (!map) initMap();
+      };
+
+      let map;
+
+      function initMap() {
+        map = L.map('curlingMap').setView([44.0731, -89.4012], 6); // Wisconsin center
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+        }).addTo(map);
+
+        const curlingStoneIcon = L.icon({
+          iconUrl: 'MeganCurlingPoint.svg',
+          iconSize: [32, 32],
+          iconAnchor: [16, 16],
+          popupAnchor: [0, -16]
+        });
+
+        const events = [
+          { club: "Rice Lake Curling Club", lat: 45.5069, lon: -91.7387 },
+          { club: "Stevens Point Curling Club", lat: 44.5236, lon: -89.5745 },
+          { club: "Frogtown Curling Club", lat: 44.9530, lon: -93.1060 },
+          { club: "St Paul Curling Club", lat: 44.9533, lon: -93.1066 },
+          { club: "Four Seasons Curling Club", lat: 45.1600, lon: -93.2366 },
+          { club: "Chaska Curling Club", lat: 44.7897, lon: -93.5988 },
+          { club: "Medford Curling Club", lat: 45.1380, lon: -90.3400 },
+          { club: "Racine Curling Club", lat: 42.7267, lon: -87.8205 },
+          { club: "Granite Curling Club", lat: 47.6734, lon: -122.3747 },
+          { club: "Dakota Curling Club", lat: 44.7567, lon: -93.2770 }
+        ];
+
+        function showGamesForClub(clubName) {
+          const resultsDiv = document.getElementById("mapResults");
+          resultsDiv.innerHTML = ""; // clear previous results
+
+          const matchingGames = pastGames.filter(g => g.location === clubName);
+
+          if (matchingGames.length === 0) {
+            resultsDiv.innerHTML = `<div class="card">No games found for ${clubName}</div>`;
+            return;
+          }
+
+          matchingGames.forEach(game => {
+            console.log("game: ", game);
+            resultsDiv.innerHTML += renderGame(game, "past-game");
+          });
+        }
+
+        events.forEach(ev => {
+          L.marker([ev.lat, ev.lon], { icon: curlingStoneIcon })
+            .addTo(map)
+            .bindPopup(`<strong>${ev.club}</strong>`)
+            .on("click", () => {
+              showGamesForClub(ev.club);
+            });
+        });
+      }
+      initMap();
     });
   </script>
 
