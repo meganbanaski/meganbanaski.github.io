@@ -482,6 +482,8 @@
           pastGames.push(game);
         }
       });
+      
+      pastGames.sort((a, b) => new Date(b.date) - new Date(a.date));
 
       const nextGame = futureGames[0];
       const upcomingGames = futureGames.slice(1);
