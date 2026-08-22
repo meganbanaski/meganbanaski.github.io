@@ -671,13 +671,28 @@
           });
         }
 
+        // Find the club with the most recent past game
+        const mostRecentGame = pastGames.reduce((latest, game) => {
+          return !latest || new Date(game.date) > new Date(latest.date)
+            ? game
+            : latest;
+        }, null);
+
+        const defaultClub = mostRecentGame?.location;
+
         events.forEach(ev => {
-          L.marker([ev.lat, ev.lon], { icon: curlingStoneIcon })
+          const marker = L.marker([ev.lat, ev.lon], { icon: curlingStoneIcon })
             .addTo(map)
             .bindPopup(`<strong>${ev.club}</strong>`)
             .on("click", () => {
               showGamesForClub(ev.club);
             });
+
+          // Automatically select the club with the most recent game
+          if (ev.club === defaultClub) {
+            marker.openPopup();
+            showGamesForClub(ev.club);
+          }
         });
       }
       initMap();
