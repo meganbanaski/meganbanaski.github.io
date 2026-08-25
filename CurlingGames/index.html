@@ -685,23 +685,47 @@
 
         const defaultClub = mostRecentGame?.location;
 
-        loadClubPoints().then(clubs => {
-          clubs.forEach(club => {
+        async function loadCSV(url) {
+          const response = await fetch(url);
+          const text = await response.text();
+          const rows = text.trim().split("\n");
+          const headers = rows.shift().split(",");
+
+          return rows.map(row => {
+            const values = row.split(",");
+            const obj = {};
+            headers.forEach((h, i) => obj[h] = values[i]);
+            return obj;
+          });
+        }
+
+        async function initMapClubs() {
+          // Load both CSVs
+          const clubs = await loadCSV("clubs.csv");
+
+          const mentioned = new Set(
+            pastGames.map(g => g.location)
+          );
+
+          // Filter clubs to only those mentioned
+          const filtered = clubs.filter(c => mentioned.has(c.club));
+
+          filtered.forEach(club => {
             const marker = L.marker([club.lat, club.lon], { icon: curlingStoneIcon })
               .addTo(map)
               .bindPopup(`<strong>${club.club}</strong>`)
               .on("click", () => {
                 showGamesForClub(club.club);
               });
-          
 
-          // Automatically select the club with the most recent game
-          if (club.club === defaultClub) {
-            marker.openPopup();
-            showGamesForClub(club.club);
-          }
+            // Automatically select the club with the most recent game
+            if (club.club === defaultClub) {
+              marker.openPopup();
+              showGamesForClub(club.club);
+            }
           });
-        });
+        }
+        initMapClubs();
       }
       initMap();
     });
