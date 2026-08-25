@@ -687,19 +687,20 @@
 
         loadClubPoints().then(clubs => {
           clubs.forEach(club => {
-            L.marker([club.lat, club.lon], { icon: curlingStoneIcon })
+            const marker = L.marker([club.lat, club.lon], { icon: curlingStoneIcon })
               .addTo(map)
               .bindPopup(`<strong>${club.club}</strong>`)
               .on("click", () => {
                 showGamesForClub(club.club);
               });
-          });
+          
 
           // Automatically select the club with the most recent game
-          if (ev.club === defaultClub) {
+          if (club.club === defaultClub) {
             marker.openPopup();
-            showGamesForClub(ev.club);
+            showGamesForClub(club.club);
           }
+          });
         });
       }
       initMap();
