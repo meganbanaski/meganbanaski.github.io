@@ -421,6 +421,7 @@
   </div>
 
   <div id="mapView">
+    <p>Select a club to view past games</p>
     <div id="mapSection">
       <div id="curlingMap" style="height: 350px; width:50%; border-radius: 12px;"></div>
       <div id="mapResults">
@@ -497,6 +498,8 @@
           pastGames.push(game);
         }
       });
+      
+      pastGames.sort((a, b) => new Date(b.date) - new Date(a.date));
 
       const nextGame = futureGames[0];
       const upcomingGames = futureGames.slice(1);
@@ -673,6 +676,15 @@
           });
         }
 
+        // Find the club with the most recent past game
+        const mostRecentGame = pastGames.reduce((latest, game) => {
+          return !latest || new Date(game.date) > new Date(latest.date)
+            ? game
+            : latest;
+        }, null);
+
+        const defaultClub = mostRecentGame?.location;
+
         loadClubPoints().then(clubs => {
           clubs.forEach(club => {
             L.marker([club.lat, club.lon], { icon: curlingStoneIcon })
@@ -682,6 +694,12 @@
                 showGamesForClub(club.club);
               });
           });
+
+          // Automatically select the club with the most recent game
+          if (ev.club === defaultClub) {
+            marker.openPopup();
+            showGamesForClub(ev.club);
+          }
         });
       }
       initMap();
