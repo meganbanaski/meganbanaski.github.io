@@ -459,6 +459,21 @@
       return jsonArray;
     }
 
+    async function loadClubPoints() {
+      const response = await fetch("clubs.csv");
+      const text = await response.text();
+
+      const rows = text.trim().split("\n");
+      const headers = rows.shift().split(",");
+
+      const clubs = rows.map(row => {
+        const [club, lat, lon] = row.split(",");
+        return { club, lat: parseFloat(lat), lon: parseFloat(lon) };
+      });
+
+      return clubs;
+    }
+
     loadGamesFromCSV().then(games => {
 
       const now = new Date();
@@ -641,19 +656,6 @@
           popupAnchor: [0, -16]
         });
 
-        const events = [
-          { club: "Rice Lake Curling Club", lat: 45.5069, lon: -91.7387 },
-          { club: "Stevens Point Curling Club", lat: 44.5236, lon: -89.5745 },
-          { club: "Frogtown Curling Club", lat: 44.9530, lon: -93.1060 },
-          { club: "St Paul Curling Club", lat: 44.9533, lon: -93.1066 },
-          { club: "Four Seasons Curling Club", lat: 45.1600, lon: -93.2366 },
-          { club: "Chaska Curling Club", lat: 44.7897, lon: -93.5988 },
-          { club: "Medford Curling Club", lat: 45.1380, lon: -90.3400 },
-          { club: "Racine Curling Club", lat: 42.7267, lon: -87.8205 },
-          { club: "Granite Curling Club", lat: 47.6734, lon: -122.3747 },
-          { club: "Dakota Curling Club", lat: 44.7567, lon: -93.2770 }
-        ];
-
         function showGamesForClub(clubName) {
           const resultsDiv = document.getElementById("mapResults");
           resultsDiv.innerHTML = ""; // clear previous results
@@ -671,13 +673,15 @@
           });
         }
 
-        events.forEach(ev => {
-          L.marker([ev.lat, ev.lon], { icon: curlingStoneIcon })
-            .addTo(map)
-            .bindPopup(`<strong>${ev.club}</strong>`)
-            .on("click", () => {
-              showGamesForClub(ev.club);
-            });
+        loadClubPoints().then(clubs => {
+          clubs.forEach(club => {
+            L.marker([club.lat, club.lon], { icon: curlingStoneIcon })
+              .addTo(map)
+              .bindPopup(`<strong>${club.club}</strong>`)
+              .on("click", () => {
+                showGamesForClub(club.club);
+              });
+          });
         });
       }
       initMap();
